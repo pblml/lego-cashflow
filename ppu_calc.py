@@ -21,8 +21,8 @@ class PayPerUse():
             print(f"columns should be {valid_log}")
             return
         res_df = df[["run", "counter"]]
-        res_df["redemtion_pu"] = self.redemption_pu
-        res_df["redemtion_rate"] = [c*r if c>=self.lower_bound else self.lower_bound*r for c, r in zip(res_df["counter"], res_df["redemtion_pu"])]
+        res_df["redemption_pu"] = self.redemption_pu
+        res_df["redemption_rate"] = [c*r if c>=self.lower_bound else self.lower_bound*r for c, r in zip(res_df["counter"], res_df["redemtion_pu"])]
         res_df["remaining_debt"] = [self.acq_cost - sum(res_df["redemtion_rate"][:i]) for i in range(len(res_df))]
         #!! FORMEL FÜR DIE ZINSBERECHNUNG FALSCH
         res_df["interest"] = res_df["remaining_debt"]*self.monthly_interest
